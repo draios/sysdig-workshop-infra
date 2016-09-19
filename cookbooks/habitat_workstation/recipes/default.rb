@@ -42,9 +42,10 @@ sudo 'chef' do
   template "chef-sudoer.erb"
 end
 
-service 'sshd'
 
 if node['platform_family'] == 'rhel'
+  service 'sshd'
+
   template '/etc/ssh/sshd_config' do
     source 'rhel-sshd_config.erb'
     owner 'root'
@@ -62,11 +63,13 @@ if node['platform_family'] == 'rhel'
 end
 
 if node['platform_family'] == 'debian'
+  service 'ssh'
+
   template '/etc/ssh/sshd_config' do
     source 'debian-sshd_config.erb'
     owner 'root'
     group 'root'
     mode '0644'
-    notifies :restart, "service[sshd]"
+    notifies :restart, "service[ssh]"
   end
 end
