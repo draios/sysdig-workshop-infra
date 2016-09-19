@@ -46,7 +46,7 @@ service 'sshd'
 
 if node['platform_family'] == 'rhel'
   template '/etc/ssh/sshd_config' do
-    source 'sshd_config.erb'
+    source 'rhel-sshd_config.erb'
     owner 'root'
     group 'root'
     mode '0644'
@@ -58,5 +58,15 @@ if node['platform_family'] == 'rhel'
     owner 'root'
     group 'root'
     mode '0644'
+  end
+end
+
+if node['platform_family'] == 'debian'
+  template '/etc/ssh/sshd_config' do
+    source 'debian-sshd_config.erb'
+    owner 'root'
+    group 'root'
+    mode '0644'
+    notifies :restart, "service[sshd]"
   end
 end
