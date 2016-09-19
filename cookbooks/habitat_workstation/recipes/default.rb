@@ -64,6 +64,12 @@ sudo 'chef' do
   template "chef-sudoer.erb"
 end
 
-execute "sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config" do
-  notifies :restart, "service[sshd]"
+template '/etc/cloud/cloud.cfg' do
+  template 'cloud.cfg.erb'
+  owner 'root'
+  group 'root'
+  mode '0644'
 end
+# execute "sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config" do
+#   notifies :restart, "service[sshd]"
+# end
