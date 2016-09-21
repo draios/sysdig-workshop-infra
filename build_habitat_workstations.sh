@@ -16,7 +16,7 @@ if [ "$#" -ne 6 ]; then
   exit 1
 fi
 
-for host in $(aws ec2 run-instances --image-id $AMI --region us-east-1 --count $NUMHOSTS --instance-type $INSTANCE_TYPE --key-name $KEY_NAME --security-group-ids "sg-a1c3b1db" --subnet-id subnet-46b55431 | jq -r ".Instances|.[].InstanceId"); do
+for host in $(aws ec2 run-instances --image-id $AMI_ID --region us-east-1 --count $NUMHOSTS --instance-type $INSTANCE_TYPE --key-name $KEY_NAME --security-group-ids "sg-a1c3b1db" --subnet-id subnet-46b55431 | jq -r ".Instances|.[].InstanceId"); do
   echo "Created instance: $host"
   echo "Tagging $host with \"$NAME\""
   aws ec2 create-tags --resources $host --tags "Key=Name,Value=\"$NAME\""
