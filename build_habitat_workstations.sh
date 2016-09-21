@@ -8,12 +8,6 @@ CONTACT=$4
 PROJECT=$5
 TERM_DATE=$6
 
-# Introduction to Habitat Workstation - CentOS 7
-# AMI="ami-85720c92"
-
-# Introduction to Habitat Workstation - Ubuntu 14.04
-AMI="ami-860c7591"
-
 INSTANCE_TYPE="t2.small"
 KEY_NAME=$AWS_KEYPAIR_NAME
 
