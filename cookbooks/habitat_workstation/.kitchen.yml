@@ -18,5 +18,13 @@ suites:
       - recipe[habitat_workstation::default]
     verifier:
       inspec_tests:
+        - test/recipes/default_test.rb
+    attributes:
+  - name: install_hab
+    run_list:
+      - recipe[habitat_workstation::default]
+      - recipe[habitat_workstation::install_hab]
+    verifier:
+      inspec_tests:
         - test/recipes
     attributes:
