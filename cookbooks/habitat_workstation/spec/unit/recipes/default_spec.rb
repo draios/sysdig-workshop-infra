@@ -27,14 +27,6 @@ describe 'habitat_workstation::default' do
       end
     end
 
-    it 'creates the "hab" group' do
-      expect(chef_run).to create_group('hab').with(members: ['hab'])
-    end
-
-    it 'creates the "hab" user' do
-      expect(chef_run).to create_user('hab')
-    end
-
     it 'creates the default docker service' do
       expect(chef_run).to create_docker_service('default')
     end
