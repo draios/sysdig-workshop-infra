@@ -21,6 +21,14 @@ describe 'habitat_workstation::default' do
     #   expect(chef_run).to periodic_apt_update('default_action')
     # end
 
+    it 'creates the "hab" group' do
+      expect(chef_run).to create_group('hab').with(members: ['hab'])
+    end
+
+    it 'creates the "hab" user' do
+      expect(chef_run).to create_user('hab')
+    end
+
     %w( git tree vim emacs nano ).each do |p|
       it 'installs #{p}' do
         expect(chef_run).to install_package p

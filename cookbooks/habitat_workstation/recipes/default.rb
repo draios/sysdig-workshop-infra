@@ -8,6 +8,17 @@ apt_update 'periodic apt update' do
   action :periodic
 end
 
+user 'hab' do
+  manage_home false
+  system true
+  uid 500
+end
+
+group 'hab' do
+  members ['hab']
+  gid 500
+end
+
 %w( git tree vim emacs nano ).each do |p|
   package p
 end
