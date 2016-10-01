@@ -18,7 +18,9 @@ Habitat Workstation - Ubuntu 16.04 - with hab 0.10.2 installed|ami-163b7b01
 ### Without Habitat installed
 
 `$ packer build packer/centos-7.json`
+
 `$ packer build packer/ubuntu-1404.json`
+
 `$ packer build packer/ubuntu-1604.json`
 
 ### With Habitat installed
@@ -28,13 +30,17 @@ The latest version of Habitat will be installed.  The version number should be s
 You can set this manually using the commands below, assuming the latest version is 0.10.2.
 
 `$ packer build -var "hab_version=0.10.2" packer/centos-7-hab-installed.json`
+
 `$ packer build -var "hab_version=0.10.2" packer/ubuntu-1404-hab-installed.json`
+
 `$ packer build -var "hab_version=0.10.2" packer/ubuntu-1604-hab-installed.json`
 
 If you have the latest version of Habitat installed, you can use these commands instead.
 
 `$ packer build -var "hab_version=$(hab --version | cut -d "/" -f1)" packer/centos-7-hab-installed.json`
+
 `$ packer build -var "hab_version=$(hab --version | cut -d "/" -f1)"  packer/ubuntu-1404-hab-installed.json`
+
 `$ packer build -var "hab_version=$(hab --version | cut -d "/" -f1)"  packer/ubuntu-1604-hab-installed.json`
 
 ## Share the AMIs with other Amazon accounts
