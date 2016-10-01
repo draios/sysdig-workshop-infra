@@ -1,8 +1,8 @@
 # habitat_workstation
 
-A cookbook for creating workstations for Habitat training workshops.
+Configures a machine as a workstation for a Habitat workshop.
 
 ## Recipes
 
-* `default` - Installs text editors, creates `chef` user with sudo access, configures ssh.
+* `default` - Prepares the workstation for Habitat installation.
 * `install_hab` - Installs the latest version of Habitat.
