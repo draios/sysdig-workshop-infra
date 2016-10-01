@@ -8,10 +8,6 @@ apt_update 'periodic apt update' do
   action :periodic
 end
 
-%w( git tree vim emacs nano ).each do |p|
-  package p
-end
-
 user 'hab' do
   manage_home false
   system true
@@ -21,6 +17,10 @@ end
 group 'hab' do
   members ['hab']
   gid 500
+end
+
+%w( git tree vim emacs nano ).each do |p|
+  package p
 end
 
 docker_service 'default' do
@@ -52,6 +52,10 @@ if node['platform_family'] == 'rhel'
     group 'root'
     mode '0644'
     notifies :restart, "service[sshd]"
+  end
+
+  directory '/etc/cloud' do
+    recursive true
   end
 
   template '/etc/cloud/cloud.cfg' do

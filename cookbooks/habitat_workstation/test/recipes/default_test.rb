@@ -20,6 +20,11 @@ end
 end
 
 # the vim package may be vim-enhanced or vim
-describe command('which vim') do
-  its(:exit_status) { should cmp 0 }
+describe command('vim') do
+  it { should exist }
 end
+
+describe user('chef') do
+  it { should exist }
+end
+
