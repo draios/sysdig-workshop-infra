@@ -8,10 +8,10 @@ Name|AMI ID
 ----|-----
 Introduction to Habitat Workstation - CentOS 7|ami-bf3f7fa8
 Introduction to Habitat Workstation - Ubuntu 14.04|ami-a62c6cb1
-Introduction to Habitat Workstation - Ubuntu 16.04|ami-033d7d14
+Introduction to Habitat Workstation - Ubuntu 16.04|
 Habitat Workstation - CentOS 7 - with hab 0.10.2 installed|ami-e03c7cf7
 Habitat Workstation - Ubuntu 14.04 - with hab 0.10.2 installed|ami-02357515
-Habitat Workstation - Ubuntu 16.04 - with hab 0.10.2 installed|ami-163b7b01
+Habitat Workstation - Ubuntu 16.04 - with hab 0.10.2 installed|
 
 ## Build the Amazon Machine Images (AMIs)
 
