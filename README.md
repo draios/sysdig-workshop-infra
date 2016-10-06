@@ -4,6 +4,8 @@ Cookbooks and Packer config to create a workstation for use during Habitat train
 
 ## Current Amazon Machine Image IDs
 
+AMIs are currently only available in `us-east` region.
+
 Name|AMI ID
 ----|-----
 Introduction to Habitat Workstation - CentOS 7|ami-bf3f7fa8
