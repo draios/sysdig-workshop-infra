@@ -4,7 +4,9 @@
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
-include_recipe 'ufw::disable'
+if (node["platform_family"] == "debian")
+  include_recipe 'ufw::disable'
+end
 
 apt_update 'periodic apt update' do
   action :periodic
