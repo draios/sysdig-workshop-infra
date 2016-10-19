@@ -7,13 +7,13 @@ Cookbooks and Packer config to create a workstation for use during Habitat train
 AMIs are currently only available in `us-east` region.
 
 Name|AMI ID
-----|-----
+----|------
 Introduction to Habitat Workstation - CentOS 7|ami-bf3f7fa8
 Introduction to Habitat Workstation - Ubuntu 14.04|ami-a62c6cb1
 Introduction to Habitat Workstation - Ubuntu 16.04|ami-fdf7b7ea
 Habitat Workstation - CentOS 7 - with hab 0.11.0 installed|ami-8a7e289d
-Habitat Workstation - Ubuntu 14.04 - with hab 0.10.2 installed|ami-02357515
-Habitat Workstation - Ubuntu 16.04 - with hab 0.10.2 installed|ami-70f6b667
+Habitat Workstation - Ubuntu 14.04 - with hab 0.11.0 installed|ami-e8a3f4ff
+Habitat Workstation - Ubuntu 16.04 - with hab 0.11.0 installed|ami-f6a5f2e1
 
 ## Build the Amazon Machine Images (AMIs)
 
