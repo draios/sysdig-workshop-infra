@@ -8,18 +8,18 @@ AMIs are currently only available in `us-east` region.
 
 Name|AMI ID
 ----|------
-Introduction to Habitat Workstation - CentOS 7|ami-bf3f7fa8
+Introduction to Habitat Workstation - RedHat 7|ami-faac8bed
 Introduction to Habitat Workstation - Ubuntu 14.04|ami-a62c6cb1
 Introduction to Habitat Workstation - Ubuntu 16.04|ami-fdf7b7ea
-Habitat Workstation - CentOS 7 - with hab 0.11.0 installed|ami-8a7e289d
-Habitat Workstation - Ubuntu 14.04 - with hab 0.11.0 installed|ami-e8a3f4ff
-Habitat Workstation - Ubuntu 16.04 - with hab 0.11.0 installed|ami-f6a5f2e1
+Habitat Workstation - RedHat 7 - with hab 0.11.0 installed|ami-6bad8a7c
+Habitat Workstation - Ubuntu 14.04 - with hab 0.11.0 installed|ami-47d5f250
+Habitat Workstation - Ubuntu 16.04 - with hab 0.11.0 installed|ami-ccfadddb
 
 ## Build the Amazon Machine Images (AMIs)
 
 ### Without Habitat installed
 
-`$ packer build packer/centos-7.json`
+`$ packer build packer/rhel-7.json`
 
 `$ packer build packer/ubuntu-1404.json`
 
@@ -31,7 +31,7 @@ The latest version of Habitat will be installed.  The version number should be s
 
 You can set this manually using the commands below, assuming the latest version is 0.10.2.
 
-`$ packer build -var "hab_version=0.10.2" packer/centos-7-hab-installed.json`
+`$ packer build -var "hab_version=0.10.2" packer/rhel-7-hab-installed.json`
 
 `$ packer build -var "hab_version=0.10.2" packer/ubuntu-1404-hab-installed.json`
 
@@ -39,7 +39,7 @@ You can set this manually using the commands below, assuming the latest version 
 
 If you have the latest version of Habitat installed, you can use these commands instead.
 
-`$ packer build -var "hab_version=$(hab --version | cut -d "/" -f1)" packer/centos-7-hab-installed.json`
+`$ packer build -var "hab_version=$(hab --version | cut -d "/" -f1)" packer/rhel-7-hab-installed.json`
 
 `$ packer build -var "hab_version=$(hab --version | cut -d "/" -f1)"  packer/ubuntu-1404-hab-installed.json`
 

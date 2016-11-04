@@ -16,14 +16,11 @@
     "ssh_keypair_name": "{{user `aws_keypair_name`}}",
     "ssh_private_key_file": "{{user `aws_keypair_file`}}",
     "ssh_pty": true,
-    "ami_name": "Habitat Workstation - CentOS 7 - with {{user `hab_version`}} installed"
+    "ami_name": "Introduction to Habitat Workstation - RedHat 7"
   }],
   "provisioners": [{
     "type": "chef-solo",
     "cookbook_paths": ["cookbooks"],
-    "run_list": [
-      "recipe[habitat_workstation]",
-      "recipe[habitat_workstation::install_hab]"
-    ]
+    "run_list": "recipe[habitat_workstation]"
   }]
 }
