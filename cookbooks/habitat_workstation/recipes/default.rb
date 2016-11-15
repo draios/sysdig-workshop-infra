@@ -23,9 +23,7 @@ group 'hab' do
   gid 500
 end
 
-%w( git tree vim emacs nano ).each do |p|
-  package p
-end
+package %w( git tree vim emacs nano )
 
 docker_service 'default' do
   action [:create, :start]
