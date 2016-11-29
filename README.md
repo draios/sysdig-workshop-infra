@@ -11,9 +11,9 @@ Name|AMI ID
 Introduction to Habitat Workstation - RedHat 7|ami-faac8bed
 Introduction to Habitat Workstation - Ubuntu 14.04|ami-a62c6cb1
 Introduction to Habitat Workstation - Ubuntu 16.04|ami-fdf7b7ea
-Habitat Workstation - RedHat 7 - with hab 0.11.0 installed|ami-6bad8a7c
-Habitat Workstation - Ubuntu 14.04 - with hab 0.11.0 installed|ami-47d5f250
-Habitat Workstation - Ubuntu 16.04 - with hab 0.11.0 installed|ami-ccfadddb
+Habitat Workstation - RedHat 7 - with hab 0.13.1 installed|ami-bb6e46ac
+Habitat Workstation - Ubuntu 14.04 - with hab 0.13.1 installed|ami-ee6149f9
+Habitat Workstation - Ubuntu 16.04 - with hab 0.13.1 installed|ami-c06e46d7
 
 ## Build the Amazon Machine Images (AMIs)
 
