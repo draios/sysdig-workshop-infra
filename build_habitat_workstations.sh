@@ -8,7 +8,7 @@ CONTACT=$4
 PROJECT=$5
 TERM_DATE=$6
 
-INSTANCE_TYPE="t2.small"
+INSTANCE_TYPE="t2.medium"
 KEY_NAME=$AWS_KEYPAIR_NAME
 
 if [ "$#" -ne 6 ]; then
