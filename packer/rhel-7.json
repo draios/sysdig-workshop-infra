@@ -16,7 +16,7 @@
     "ssh_keypair_name": "{{user `aws_keypair_name`}}",
     "ssh_private_key_file": "{{user `aws_keypair_file`}}",
     "ssh_pty": true,
-    "ami_name": "Introduction to Habitat Workstation - RedHat 7"
+    "ami_name": "Intro to Habitat Workstation - RedHat 7 - {{timestamp}}"
   }],
   "provisioners": [{
     "type": "chef-solo",
