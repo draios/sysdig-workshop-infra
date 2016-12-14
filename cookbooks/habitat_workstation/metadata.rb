@@ -10,5 +10,5 @@ source_url 'https://github.com/nathenharvey/habitat_workstation' if respond_to?(
 
 depends 'docker'
 depends 'sudo'
-depends 'ark'
 depends 'ufw'
+depends 'habitat'

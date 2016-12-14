@@ -1,22 +1,18 @@
 {
   "variables": {
     "aws_access_key": "{{env `AWS_ACCESS_KEY`}}",
-    "aws_secret_key": "{{env `AWS_SECRET_KEY`}}",
-    "aws_keypair_name": "{{env `AWS_KEYPAIR_NAME`}}",
-    "aws_keypair_file": "{{env `AWS_PRIVATE_KEY_PATH`}}"
+    "aws_secret_key": "{{env `AWS_SECRET_KEY`}}"
   },
   "builders": [{
     "type": "amazon-ebs",
     "access_key": "{{user `aws_access_key`}}",
     "secret_key": "{{user `aws_secret_key`}}",
     "region": "us-east-1",
-    "source_ami": "ami-2d39803a",
-    "instance_type": "m3.medium",
+    "source_ami": "ami-72343365",
+    "instance_type": "t2.medium",
     "ssh_username": "ubuntu",
-    "ssh_keypair_name": "{{user `aws_keypair_name`}}",
-    "ssh_private_key_file": "{{user `aws_keypair_file`}}",
     "ssh_pty": true,
-    "ami_name": "Introduction to Habitat Workstation - Ubuntu 14.04"
+    "ami_name": "Intro to Habitat Workstation - Ubuntu 14.04 - {{timestamp}}"
   }],
   "provisioners": [{
     "type": "chef-solo",
