@@ -1,7 +1,9 @@
 {
   "variables": {
     "aws_access_key": "{{env `AWS_ACCESS_KEY`}}",
-    "aws_secret_key": "{{env `AWS_SECRET_KEY`}}"
+    "aws_secret_key": "{{env `AWS_SECRET_KEY`}}",
+    "hab_version": "latest",
+    "timestamp": "{{isotime \"20060102150405\"}}"
   },
   "builders": [{
     "type": "amazon-ebs",
@@ -12,11 +14,18 @@
     "instance_type": "t2.medium",
     "ssh_username": "ubuntu",
     "ssh_pty": true,
-    "ami_name": "Intro to Habitat Workstation - Ubuntu 14.04 - {{timestamp}}"
+    "ami_name": "Ubuntu 14.04 - hab {{user `hab_version`}} - {{user `timestamp`}}"
   }],
   "provisioners": [{
     "type": "chef-solo",
-    "cookbook_paths": ["cookbooks"],
-    "run_list": "recipe[habitat_workstation]"
+    "cookbook_paths": ["vendored-cookbooks"],
+    "run_list": [
+      "recipe[habitat_workstation]"
+    ],
+    "json": {
+      "hab": {
+        "version": "{{user `hab_version`}}"
+      }
+    }
   }]
 }
