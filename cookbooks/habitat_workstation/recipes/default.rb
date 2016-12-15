@@ -29,7 +29,6 @@ docker_service 'default' do
   action [:create, :start]
 end
 
-
 user 'chef' do
   comment 'ChefDK User'
   manage_home true
@@ -40,9 +39,8 @@ user 'chef' do
 end
 
 sudo 'chef' do
-  template "chef-sudoer.erb"
+  template 'chef-sudoer.erb'
 end
-
 
 if node['platform_family'] == 'rhel'
   service 'sshd'
@@ -52,7 +50,7 @@ if node['platform_family'] == 'rhel'
     owner 'root'
     group 'root'
     mode '0644'
-    notifies :restart, "service[sshd]"
+    notifies :restart, 'service[sshd]'
   end
 
   directory '/etc/cloud' do
@@ -75,6 +73,11 @@ if node['platform_family'] == 'debian'
     owner 'root'
     group 'root'
     mode '0644'
-    notifies :restart, "service[ssh]"
+    notifies :restart, 'service[ssh]'
   end
+end
+
+hab_install 'install habitat' do
+  version 'latest'
+  not_if { node['hab']['version'] == 'none' }
 end

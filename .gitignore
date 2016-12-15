@@ -1,0 +1,4 @@
+vendored-cookbooks/
+results/
+stacks/*.yml
+results.yml

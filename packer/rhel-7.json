@@ -2,25 +2,30 @@
   "variables": {
     "aws_access_key": "{{env `AWS_ACCESS_KEY`}}",
     "aws_secret_key": "{{env `AWS_SECRET_KEY`}}",
-    "aws_keypair_name": "{{env `AWS_KEYPAIR_NAME`}}",
-    "aws_keypair_file": "{{env `AWS_PRIVATE_KEY_PATH`}}"
+    "hab_version": "latest",
+    "timestamp": "{{isotime \"20060102150405\"}}"
   },
   "builders": [{
     "type": "amazon-ebs",
     "access_key": "{{user `aws_access_key`}}",
     "secret_key": "{{user `aws_secret_key`}}",
     "region": "us-east-1",
-    "source_ami": "ami-2051294a",
-    "instance_type": "m3.medium",
+    "source_ami": "ami-a8d369c0",
+    "instance_type": "t2.medium",
     "ssh_username": "ec2-user",
-    "ssh_keypair_name": "{{user `aws_keypair_name`}}",
-    "ssh_private_key_file": "{{user `aws_keypair_file`}}",
     "ssh_pty": true,
-    "ami_name": "Intro to Habitat Workstation - RedHat 7 - {{timestamp}}"
+    "ami_name": "RedHat 7 - hab {{user `hab_version`}} - {{user `timestamp`}}"
   }],
   "provisioners": [{
     "type": "chef-solo",
-    "cookbook_paths": ["cookbooks"],
-    "run_list": "recipe[habitat_workstation]"
+    "cookbook_paths": ["vendored-cookbooks"],
+    "run_list": [
+      "recipe[habitat_workstation]"
+    ],
+    "json": {
+      "hab": {
+        "version": "{{user `hab_version`}}"
+      }
+    }
   }]
 }

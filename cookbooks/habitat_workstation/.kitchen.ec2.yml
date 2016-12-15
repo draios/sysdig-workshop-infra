@@ -1,6 +1,13 @@
 ---
 driver:
-  name: vagrant
+  name: ec2
+  instance_type: t2.medium
+  security_group_ids: ["sg-a1c3b1db"]
+  subnet_id: subnet-46b55431
+  aws_ssh_key_id: <%= ENV["EC2_SSH_KEY_NAME"] %>
+
+transport:
+  ssh_key: <%= ENV["EC2_SSH_KEY_PATH"] %>
 
 provisioner:
   name: chef_zero
@@ -11,7 +18,7 @@ verifier:
 platforms:
   - name: ubuntu-14.04
   - name: ubuntu-16.04
-  - name: centos-7.2
+  - name: centos-7
 
 suites:
   - name: default

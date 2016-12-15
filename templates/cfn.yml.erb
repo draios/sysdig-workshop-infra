@@ -1,0 +1,66 @@
+---
+Description: "Habitat Lab - <%= @workstations.to_s %> workstations"
+
+Parameters:
+  InstanceType:
+    Default: t2.medium
+    Type: "String"
+  WorkstationAMI:
+    Default: <%= @ami_id %>
+    Type: "String"
+  Contact:
+    Default: "Seth Thomas"
+    Type: "String"
+  Department:
+    Default: "Community Engineering"
+    Type: "String"
+  Project:
+    Default: "HabiHacks East"
+    Type: "String"
+  KeyName:
+    Description: "Name of an existing ec2 KeyPair to enable SSH access"
+    Type: "AWS::EC2::KeyPair::KeyName"
+    Default: <%= @keypair %>
+  SecurityGroupID:
+    Description: "SecurityGroup"
+    Type: "String"
+    Default: sg-a1c3b1db
+  SubnetID:
+    Description: "Subnet"
+    Type: "String"
+    Default: subnet-46b55431
+  TerminationDate:
+    Description: "Termination Date"
+    Type: "String"
+    Default: "2016-12-13"
+
+Resources:
+<% 1.upto(@workstations) do |i| -%>
+  workstation<%= i.to_s %>:
+    Type: AWS::EC2::Instance
+    Properties:
+      SubnetId: !Ref SubnetID
+      SecurityGroupIds:
+      - !Ref SecurityGroupID
+      KeyName: !Ref KeyName
+      InstanceType: !Ref InstanceType
+      ImageId: !Ref WorkstationAMI
+      Tags:
+      - Key: Name
+        Value: "workstation <%= i.to_s %>"
+      - Key: X-Dept
+        Value: !Ref Department
+      - Key: X-Contact
+        Value: !Ref Contact
+      - Key: X-Project
+        Value: !Ref Project
+      - Key: X-Termination-Date
+        Value: !Ref TerminationDate
+<% end -%>
+
+Outputs:
+<% 1.upto(@workstations) do |i| -%>
+  workstation<%= i.to_s %>:
+    Description: "Public IP address of workstation <%= i.to_s %>"
+    Value: !GetAtt workstation<%= i.to_s %>.PublicIp
+<% end -%>

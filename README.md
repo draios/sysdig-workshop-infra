@@ -15,35 +15,40 @@ Habitat Workstation - RedHat 7 - with hab 0.13.1 installed|ami-bb6e46ac
 Habitat Workstation - Ubuntu 14.04 - with hab 0.13.1 installed|ami-ee6149f9
 Habitat Workstation - Ubuntu 16.04 - with hab 0.13.1 installed|ami-c06e46d7
 
+## Pre-requisites
+
+```
+# The name of the AWS KeyPair to use for deployment
+export $AWS_KEYPAIR_NAME='your_aws_keypair_name'
+```
+
+*NOTE*: Ensure your `~/.aws/config` region is set to `us-east-1` pending region abstraction
+
 ## Build the Amazon Machine Images (AMIs)
 
 ### Without Habitat installed
 
-`$ packer build packer/rhel-7.json`
+`$ packer build -var "hab_version=none" packer/centos-7.json`
 
-`$ packer build packer/ubuntu-1404.json`
+`$ packer build -var "hab_version=none" packer/rhel-7.json`
 
-`$ packer build packer/ubuntu-1604.json`
+`$ packer build -var "hab_version=none" packer/ubuntu-1404.json`
+
+`$ packer build -var "hab_version=none" packer/ubuntu-1604.json`
 
 ### With Habitat installed
 
-The latest version of Habitat will be installed.  The version number should be specified in the AMI name.  The template expects a `hab_version` variable is set.
+`$ packer build -var "hab_version=0.14.0" packer/centos-7.json`
 
-You can set this manually using the commands below, assuming the latest version is 0.10.2.
+`$ packer build -var "hab_version=0.14.0" packer/rhel-7.json`
 
-`$ packer build -var "hab_version=0.10.2" packer/rhel-7-hab-installed.json`
+`$ packer build -var "hab_version=0.14.0" packer/ubuntu-1404.json`
 
-`$ packer build -var "hab_version=0.10.2" packer/ubuntu-1404-hab-installed.json`
+`$ packer build -var "hab_version=0.14.0" packer/ubuntu-1604.json`
 
-`$ packer build -var "hab_version=0.10.2" packer/ubuntu-1604-hab-installed.json`
+The latest version of Habitat will be installed, 
+`hab_version` is primarily for display and only has functionality when set to `none`  
 
-If you have the latest version of Habitat installed, you can use these commands instead.
-
-`$ packer build -var "hab_version=$(hab --version | cut -d "/" -f1)" packer/rhel-7-hab-installed.json`
-
-`$ packer build -var "hab_version=$(hab --version | cut -d "/" -f1)"  packer/ubuntu-1404-hab-installed.json`
-
-`$ packer build -var "hab_version=$(hab --version | cut -d "/" -f1)"  packer/ubuntu-1604-hab-installed.json`
 
 ## Share the AMIs with other Amazon accounts
 
