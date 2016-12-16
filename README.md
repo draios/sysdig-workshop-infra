@@ -30,7 +30,7 @@ export $AWS_KEYPAIR_NAME='your_aws_keypair_name'
 
 ### With Habitat installed
 
-`$ rake ami:build[ubuntu-16.04,0.14.0]`
+`$ rake ami:build[ubuntu-1604,0.14.0]`
 
 The latest version of Habitat will be installed, 
 The version is for display purposes unless set to `none`
