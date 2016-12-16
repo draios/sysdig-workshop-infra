@@ -3,19 +3,19 @@ Description: "Habitat Lab - <%= @workstations.to_s %> workstations"
 
 Parameters:
   InstanceType:
-    Default: t2.medium
+    Default: <%= @conf['type'] %>
     Type: "String"
   WorkstationAMI:
     Default: <%= @ami_id %>
     Type: "String"
   Contact:
-    Default: "Seth Thomas"
+    Default: <%= @conf['contact'] %>
     Type: "String"
   Department:
-    Default: "Community Engineering"
+    Default: <%= @conf['dept'] %>
     Type: "String"
   Project:
-    Default: "HabiHacks East"
+    Default: <%= @conf['project'] %>
     Type: "String"
   KeyName:
     Description: "Name of an existing ec2 KeyPair to enable SSH access"
@@ -24,15 +24,15 @@ Parameters:
   SecurityGroupID:
     Description: "SecurityGroup"
     Type: "String"
-    Default: sg-a1c3b1db
+    Default: <%= @conf['sg'] %>
   SubnetID:
     Description: "Subnet"
     Type: "String"
-    Default: subnet-46b55431
+    Default: <%= @conf['subnet'] %>
   TerminationDate:
     Description: "Termination Date"
     Type: "String"
-    Default: "2016-12-13"
+    Default: <%= @term_date %>
 
 Resources:
 <% 1.upto(@workstations) do |i| -%>
