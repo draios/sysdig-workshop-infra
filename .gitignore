@@ -2,3 +2,5 @@ vendored-cookbooks/
 results/
 stacks/*.yml
 results.yml
+config.yml
+Gemfile.lock

@@ -6,14 +6,12 @@ Cookbooks and Packer config to create a workstation for use during Habitat train
 
 AMIs are currently only available in `us-east` region.
 
-Name|AMI ID
-----|------
-Introduction to Habitat Workstation - RedHat 7|ami-faac8bed
-Introduction to Habitat Workstation - Ubuntu 14.04|ami-a62c6cb1
-Introduction to Habitat Workstation - Ubuntu 16.04|ami-fdf7b7ea
-Habitat Workstation - RedHat 7 - with hab 0.13.1 installed|ami-bb6e46ac
-Habitat Workstation - Ubuntu 14.04 - with hab 0.13.1 installed|ami-ee6149f9
-Habitat Workstation - Ubuntu 16.04 - with hab 0.13.1 installed|ami-c06e46d7
+Platform     | Hab 0.14.0   | none
+----         | ------       | ----
+CentOS 7     | ami-bbc2cbac | ami-58c4cd4f
+RedHat 7     | ami-04c3ca13 | ami-9ac6cf8d
+Ubuntu 14.04 | ami-7dc4cd6a | ami-66c3ca71
+Ubuntu 16.04 | ami-05c3ca12 | ami-c3c5ccd4
 
 ## Pre-requisites
 
@@ -28,27 +26,24 @@ export $AWS_KEYPAIR_NAME='your_aws_keypair_name'
 
 ### Without Habitat installed
 
-`$ packer build -var "hab_version=none" packer/centos-7.json`
-
-`$ packer build -var "hab_version=none" packer/rhel-7.json`
-
-`$ packer build -var "hab_version=none" packer/ubuntu-1404.json`
-
-`$ packer build -var "hab_version=none" packer/ubuntu-1604.json`
+`$ rake ami:build[centos-7,none]`
 
 ### With Habitat installed
 
-`$ packer build -var "hab_version=0.14.0" packer/centos-7.json`
-
-`$ packer build -var "hab_version=0.14.0" packer/rhel-7.json`
-
-`$ packer build -var "hab_version=0.14.0" packer/ubuntu-1404.json`
-
-`$ packer build -var "hab_version=0.14.0" packer/ubuntu-1604.json`
+`$ rake ami:build[ubuntu-16.04,0.14.0]`
 
 The latest version of Habitat will be installed, 
-`hab_version` is primarily for display and only has functionality when set to `none`  
+The version is for display purposes unless set to `none`
 
+### List available templates
+
+```
+$ rake list:templates
+centos-7
+rhel-7
+ubuntu-1404
+ubuntu-1604
+```
 
 ## Share the AMIs with other Amazon accounts
 
@@ -57,22 +52,38 @@ $ export AMI_ID=the_ami_id_generated_by_packer
 $ rake ami:share
 ```
 
-## Build out Workstations for a Classroom
+## Deploy a CloudFormation stack
+
+This deploys a CloudFormation stack with the number of hosts and TTL (days). 
+A template will be created in `stacks/` with the arguments above and values from `config.yml`.
+An example, `config.example.yml`, is included
 
 ```bash
+# rake deploy[name,num_hosts,ttl]
+
 $ export AMI_ID=the_ami_id_generated_by_packer
-$ build_habitat_workstations.sh [number] [name] [department] [contact] [project] [termination-date]
+$ rake deploy[habihacks-stack,10,3]
 ```
 
-e.g.
+```
+$ cat config.example.yml
+---
+contact: Human Chef
+dept: Community Engineering
+project: Habihacks
+region: us-east-1
+sg: sg-a1c3b1db
+subnet: subnet-46b55431
+type: t2.medium 
+```
+
+## List Workstation IPs for a CloudFormation stack
+
 ```bash
-$ export AMI_ID=the_ami_id_generated_by_packer
-$ build_habitat_workstations.sh 20 "Surge Conf 2016" "Community Engineering" "Nathen Harvey" "Surge" "2016-09-23"
-```
-
-## List Workstations for a Classroom
-
-```
-$ export AMI_ID=the_ami_id_generated_by_packer
-$ show_running_instances.sh
+$ rake list:ips[habihacks-stack]
+workstation1: 54.172.141.159
+workstation2: 54.87.195.76
+workstation3: 54.91.122.177
+workstation4: 54.86.46.187
+workstation5: 54.227.190.60
 ```
