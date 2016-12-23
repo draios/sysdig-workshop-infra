@@ -20,7 +20,17 @@ Ubuntu 16.04 | ami-0bcadc1c | ami-c3c5ccd4
 export $AWS_KEYPAIR_NAME='your_aws_keypair_name'
 ```
 
-*NOTE*: Ensure your `~/.aws/config` region is set to `us-east-1` pending region abstraction
+*NOTE*: Ensure your `~/.aws/config` region is set to `us-east-1` pending region
+abstraction.
+
+An `~/.aws/config` file might look like:
+
+```
+[default]
+region=us-east-1
+aws_access_key_id = MYKEYID
+aws_secret_access_key = MYACCESSKEY
+```
 
 ## Build the Amazon Machine Images (AMIs)
 
