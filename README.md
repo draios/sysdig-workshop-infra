@@ -6,12 +6,12 @@ Cookbooks and Packer config to create a workstation for use during Habitat train
 
 AMIs are currently only available in `us-east` region.
 
-Platform     | Hab 0.14.0   | none
+Platform     | Hab 0.15.0   | none
 ----         | ------       | ----
-CentOS 7     | ami-bbc2cbac | ami-58c4cd4f
-RedHat 7     | ami-04c3ca13 | ami-9ac6cf8d
-Ubuntu 14.04 | ami-7dc4cd6a | ami-66c3ca71
-Ubuntu 16.04 | ami-05c3ca12 | ami-c3c5ccd4
+CentOS 7     | ami-0cf0e61b | ami-58c4cd4f
+RedHat 7     | ami-07ffe910 | ami-9ac6cf8d
+Ubuntu 14.04 | ami-c5f3e5d2 | ami-66c3ca71
+Ubuntu 16.04 | ami-0bcadc1c | ami-c3c5ccd4
 
 ## Pre-requisites
 
