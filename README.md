@@ -34,6 +34,10 @@ aws_secret_access_key = MYACCESSKEY
 
 ## Build the Amazon Machine Images (AMIs)
 
+Update the vendored cookbooks before building the AMIs.
+
+`$ rake cookbook:vendor`
+
 ### Without Habitat installed
 
 `$ rake ami:build[centos-7,none]`
