@@ -103,6 +103,14 @@ def fetch_env(var)
   env_var
 end
 
+def fetch_ami_id
+  fetch_env('AMI_ID')
+end
+
+def fetch_aws_keypair_name
+  fetch_env('AWS_KEYPAIR_NAME')
+end
+
 def gather_results
   pattern = '..-.*-.: ami-.*'
   h = { }
@@ -166,8 +174,8 @@ end
 def update_template(name, num_hosts, ttl)
   @conf = conf
   @term_date = (Time.now + (ttl.to_i * 86400)).strftime("%Y-%m-%d")
-  @ami_id = fetch_env('AMI_ID')
-  @keypair = fetch_env('AWS_KEYPAIR_NAME')
+  @ami_id = fetch_ami_id
+  @keypair = fetch_aws_keypair_name
   @workstations = num_hosts.to_i
   rendered_cfn = ERB.new(File.read('templates/cfn.yml.erb'), nil, '-').result(binding)
   File.open("stacks/#{name}.cfn.yml", 'w') { |file| file.puts rendered_cfn }
