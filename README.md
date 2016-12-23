@@ -1,17 +1,18 @@
 # Habitat Workstation
 
-Cookbooks and Packer config to create a workstation for use during Habitat training.
+Cookbooks and Packer config to create a workstation for use during Habitat
+training.
 
 ## Current Amazon Machine Image IDs
 
 AMIs are currently only available in `us-east` region.
 
-Platform     | Hab 0.14.0   | none
+Platform     | Hab 0.15.0   | none
 ----         | ------       | ----
-CentOS 7     | ami-bbc2cbac | ami-58c4cd4f
-RedHat 7     | ami-04c3ca13 | ami-9ac6cf8d
-Ubuntu 14.04 | ami-7dc4cd6a | ami-66c3ca71
-Ubuntu 16.04 | ami-05c3ca12 | ami-c3c5ccd4
+CentOS 7     | ami-0cf0e61b | ami-58c4cd4f
+RedHat 7     | ami-07ffe910 | ami-9ac6cf8d
+Ubuntu 14.04 | ami-c5f3e5d2 | ami-66c3ca71
+Ubuntu 16.04 | ami-0bcadc1c | ami-c3c5ccd4
 
 ## Pre-requisites
 
@@ -20,9 +21,23 @@ Ubuntu 16.04 | ami-05c3ca12 | ami-c3c5ccd4
 export $AWS_KEYPAIR_NAME='your_aws_keypair_name'
 ```
 
-*NOTE*: Ensure your `~/.aws/config` region is set to `us-east-1` pending region abstraction
+*NOTE*: Ensure your `~/.aws/config` region is set to `us-east-1` pending region
+abstraction.
+
+An `~/.aws/config` file might look like:
+
+```
+[default]
+region=us-east-1
+aws_access_key_id = MYKEYID
+aws_secret_access_key = MYACCESSKEY
+```
 
 ## Build the Amazon Machine Images (AMIs)
+
+Update the vendored cookbooks before building the AMIs.
+
+`$ rake cookbook:vendor`
 
 ### Without Habitat installed
 
@@ -32,7 +47,7 @@ export $AWS_KEYPAIR_NAME='your_aws_keypair_name'
 
 `$ rake ami:build[ubuntu-1604,0.14.0]`
 
-The latest version of Habitat will be installed, 
+The latest version of Habitat will be installed,
 The version is for display purposes unless set to `none`
 
 ### List available templates
@@ -54,9 +69,9 @@ $ rake ami:share
 
 ## Deploy a CloudFormation stack
 
-This deploys a CloudFormation stack with the number of hosts and TTL (days). 
-A template will be created in `stacks/` with the arguments above and values from `config.yml`.
-An example, `config.example.yml`, is included
+This deploys a CloudFormation stack with the number of hosts and TTL (days).
+A template will be created in `stacks/` with the arguments above and values from
+`config.yml`.  An example, `config.example.yml`, is included
 
 ```bash
 # rake deploy[name,num_hosts,ttl]
@@ -74,7 +89,7 @@ project: Habihacks
 region: us-east-1
 sg: sg-a1c3b1db
 subnet: subnet-46b55431
-type: t2.medium 
+type: t2.medium
 ```
 
 ## List Workstation IPs for a CloudFormation stack

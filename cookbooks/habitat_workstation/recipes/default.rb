@@ -78,6 +78,5 @@ if node['platform_family'] == 'debian'
 end
 
 hab_install 'install habitat' do
-  version 'latest'
   not_if { node['hab']['version'] == 'none' }
 end
