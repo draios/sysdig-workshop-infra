@@ -1,6 +1,7 @@
 # Habitat Workstation
 
-Cookbooks and Packer config to create a workstation for use during Habitat training.
+Cookbooks and Packer config to create a workstation for use during Habitat
+training.
 
 ## Current Amazon Machine Image IDs
 
@@ -46,7 +47,7 @@ Update the vendored cookbooks before building the AMIs.
 
 `$ rake ami:build[ubuntu-1604,0.14.0]`
 
-The latest version of Habitat will be installed, 
+The latest version of Habitat will be installed,
 The version is for display purposes unless set to `none`
 
 ### List available templates
@@ -68,9 +69,9 @@ $ rake ami:share
 
 ## Deploy a CloudFormation stack
 
-This deploys a CloudFormation stack with the number of hosts and TTL (days). 
-A template will be created in `stacks/` with the arguments above and values from `config.yml`.
-An example, `config.example.yml`, is included
+This deploys a CloudFormation stack with the number of hosts and TTL (days).
+A template will be created in `stacks/` with the arguments above and values from
+`config.yml`.  An example, `config.example.yml`, is included
 
 ```bash
 # rake deploy[name,num_hosts,ttl]
@@ -88,7 +89,7 @@ project: Habihacks
 region: us-east-1
 sg: sg-a1c3b1db
 subnet: subnet-46b55431
-type: t2.medium 
+type: t2.medium
 ```
 
 ## List Workstation IPs for a CloudFormation stack
