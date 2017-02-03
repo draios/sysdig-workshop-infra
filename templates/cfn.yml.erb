@@ -45,6 +45,12 @@ Resources:
       KeyName: !Ref KeyName
       InstanceType: !Ref InstanceType
       ImageId: !Ref WorkstationAMI
+      BlockDeviceMappings:
+        - DeviceName: "/dev/sda1"
+          Ebs:
+            VolumeType: "gp2"
+            VolumeSize: "50"
+            DeleteOnTermination: "true"
       Tags:
       - Key: Name
         Value: "workstation <%= i.to_s %>"
