@@ -10,7 +10,7 @@
     "access_key": "{{user `aws_access_key`}}",
     "secret_key": "{{user `aws_secret_key`}}",
     "region": "us-east-1",
-    "source_ami": "ami-a8d369c0",
+    "source_ami": "ami-2051294a",
     "instance_type": "t2.medium",
     "ssh_username": "ec2-user",
     "ssh_pty": true,
