@@ -9,10 +9,10 @@ AMIs are currently only available in `us-east` region.
 
 Platform     | Hab 0.16.0   | none
 ----         | ------       | ----
-CentOS 7     | ami-fa43b8ec | ami-2846bd3e
-RedHat 7     | ami-9d4cb78b | ami-93b44e85
-Ubuntu 14.04 | ami-5a4db64c | ami-deb54fc8
-Ubuntu 16.04 | ami-0842b91e | ami-7fa85269
+CentOS 7     | ami-c78047d1 | ami-2846bd3e
+RedHat 7     | ami-d38245c5 | ami-93b44e85
+Ubuntu 14.04 | ami-8981469f | ami-deb54fc8
+Ubuntu 16.04 | ami-85804793 | ami-7fa85269
 
 ## Pre-requisites
 
