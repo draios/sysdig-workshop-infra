@@ -103,3 +103,9 @@ workstation3: 54.91.122.177
 workstation4: 54.86.46.187
 workstation5: 54.227.190.60
 ```
+
+## Finding the latest, official AMIs
+
+* RedHat - `ec2-describe-images -o 309956199498`
+* Ubuntu - https://cloud-images.ubuntu.com/locator/
+* CentOs - https://aws.amazon.com/marketplace/seller-profile?id=16cb8b03-256e-4dde-8f34-1b0f377efe89
