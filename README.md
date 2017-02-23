@@ -7,12 +7,13 @@ training.
 
 AMIs are currently only available in `us-east` region.
 
-Platform     | Hab 0.16.0   | none
+Platform     | Hab 0.17.0   | none
 ----         | ------       | ----
-CentOS 7     | ami-c78047d1 | ami-2846bd3e
-RedHat 7     | ami-d38245c5 | ami-93b44e85
-Ubuntu 14.04 | ami-8981469f | ami-deb54fc8
-Ubuntu 16.04 | ami-85804793 | ami-7fa85269
+CentOS 7     | ami-78b96c6e | ami-2846bd3e
+RedHat 7     | ami-e98652ff | ami-55865243
+Ubuntu 14.04 | ami-d4be6bc2 | ami-deb54fc8
+Ubuntu 16.04 | ami-42b86d54 | ami-7fa85269
+Ubuntu 16.10 | ami-0c86521a | ami-4a84505c
 
 ## Pre-requisites
 
@@ -102,3 +103,9 @@ workstation3: 54.91.122.177
 workstation4: 54.86.46.187
 workstation5: 54.227.190.60
 ```
+
+## Finding the latest, official AMIs
+
+* RedHat - `ec2-describe-images -o 309956199498`
+* Ubuntu - https://cloud-images.ubuntu.com/locator/
+* CentOs - https://aws.amazon.com/marketplace/seller-profile?id=16cb8b03-256e-4dde-8f34-1b0f377efe89

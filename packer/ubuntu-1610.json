@@ -10,11 +10,11 @@
     "access_key": "{{user `aws_access_key`}}",
     "secret_key": "{{user `aws_secret_key`}}",
     "region": "us-east-1",
-    "source_ami": "ami-b63769a1",
+    "source_ami": "ami-4ae1fb5d",
     "instance_type": "t2.medium",
-    "ssh_username": "ec2-user",
+    "ssh_username": "ubuntu",
     "ssh_pty": true,
-    "ami_name": "RedHat 7 - hab {{user `hab_version`}} - {{user `timestamp`}}"
+    "ami_name": "Ubuntu 16.10 - hab {{user `hab_version`}} - {{user `timestamp`}}"
   }],
   "provisioners": [{
     "type": "chef-solo",
