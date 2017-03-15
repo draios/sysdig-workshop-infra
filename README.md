@@ -7,13 +7,13 @@ training.
 
 AMIs are currently only available in `us-east` region.
 
-Platform     | Hab 0.17.0   | none
+Platform     | Hab 0.19.0   | none
 ----         | ------       | ----
-CentOS 7     | ami-78b96c6e | ami-2846bd3e
-RedHat 7     | ami-e98652ff | ami-55865243
-Ubuntu 14.04 | ami-d4be6bc2 | ami-deb54fc8
-Ubuntu 16.04 | ami-42b86d54 | ami-7fa85269
-Ubuntu 16.10 | ami-0c86521a | ami-4a84505c
+CentOS 7     | ami-98a10e8e | ami-2846bd3e
+RedHat 7     | ami-67a00f71 | ami-55865243
+Ubuntu 14.04 | ami-64bd1272 | ami-deb54fc8
+Ubuntu 16.04 | ami-27be1131 | ami-7fa85269
+Ubuntu 16.10 | ami-70bd1266 | ami-4a84505c
 
 ## Pre-requisites
 
