@@ -80,3 +80,10 @@ end
 hab_install 'install habitat' do
   not_if { node['hab']['version'] == 'none' }
 end
+
+cookbook_file '/home/chef/new-mongodb-config.toml' do
+  source 'new-mongodb-config.toml'
+  owner 'chef'
+  group 'chef'
+  mode '0664'
+end
