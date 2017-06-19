@@ -16,13 +16,14 @@ aws_access_key_id = MYKEYID
 aws_secret_access_key = MYACCESSKEY
 ```
 
-Platform     | Hab 0.20.0   | none
+Platform     | Hab 0.24.1   | none
 ----         | ------       | ----
-CentOS 7     | ami-22b03d34 | ami-2846bd3e
-RedHat 7     | ami-884ec39e | ami-55865243
-Ubuntu 14.04 | ami-0f6fe219 | ami-deb54fc8
-Ubuntu 16.04 | ami-9153de87 | ami-7fa85269
-Ubuntu 16.10 | ami-ba4ac7ac | ami-4a84505c
+CentOS 7     | ami-aa4162bc | ami-dafbd7cc
+RedHat 7     | ami-2e230038 | ami-9cffd38a
+Ubuntu 14.04 | ami-fe1a36e8 | ami-901b3786
+Ubuntu 16.04 | ami-83715295 | ami-67123e71
+Ubuntu 16.10 | ami-9b7d5e8d | ami-9b7d5e8d
+Ubuntu 17.04 | ami-cb7c5fdd | ami-c9f8d4df
 
 ## Pre-requisites
 
@@ -39,7 +40,7 @@ This rake task updates the vendored cookbooks before building the AMIs.
 
 ### To create AMIs with Habitat installed
 
-`$ rake "ami:build[ubuntu-1604,0.14.0]"`
+`$ rake "ami:build[ubuntu-1604,0.24.1]"`
 
 The latest version of Habitat will be installed,
 The version is for display purposes unless set to `none`
@@ -100,9 +101,3 @@ workstation3: 54.91.122.177
 workstation4: 54.86.46.187
 workstation5: 54.227.190.60
 ```
-
-## Finding the latest, official AMIs
-
-* RedHat - `ec2-describe-images -o 309956199498`
-* Ubuntu - https://cloud-images.ubuntu.com/locator/
-* CentOs - https://aws.amazon.com/marketplace/seller-profile?id=16cb8b03-256e-4dde-8f34-1b0f377efe89

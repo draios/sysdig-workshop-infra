@@ -10,7 +10,15 @@
     "access_key": "{{user `aws_access_key`}}",
     "secret_key": "{{user `aws_secret_key`}}",
     "region": "us-east-1",
-    "source_ami": "ami-b63769a1",
+    "source_ami_filter": {
+      "filters": {
+        "virtualization-type": "hvm",
+        "name": "RHEL-7.3_HVM*",
+        "root-device-type": "ebs"
+      },
+      "owners": ["309956199498"],
+      "most_recent": true
+    },
     "instance_type": "t2.medium",
     "ssh_username": "ec2-user",
     "ssh_pty": true,
