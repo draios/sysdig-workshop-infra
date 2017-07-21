@@ -18,10 +18,10 @@ aws_secret_access_key = MYACCESSKEY
 
 Platform     | Hab 0.26.1   | none
 ----         | ------       | ----
-CentOS 7     | ami-a2c3d0b4 | ami-dafbd7cc
-Ubuntu 16.04 | ami-ed2f3cfb | ami-67123e71
-Ubuntu 16.10 | ami-2d2d3e3b | ami-9b7d5e8d
-Ubuntu 17.04 | ami-b5d5c6a3 | ami-c9f8d4df
+CentOS 7     | ami-a2c3d0b4 | ami-9ec2d188
+Ubuntu 16.04 | ami-ed2f3cfb | ami-b9f1e2af
+Ubuntu 16.10 | ami-2d2d3e3b | ami-8ef6e598
+Ubuntu 17.04 | ami-ecf9eafa | ami-c7fae9d1
 
 ## Pre-requisites
 
