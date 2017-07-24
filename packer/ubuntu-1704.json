@@ -22,7 +22,7 @@
     "instance_type": "t2.medium",
     "ssh_username": "ubuntu",
     "ssh_pty": true,
-    "ami_name": "Ubuntu 16.10 - hab {{user `hab_version`}} - {{user `timestamp`}}"
+    "ami_name": "Ubuntu 17.04 - hab {{user `hab_version`}} - {{user `timestamp`}}"
   }],
   "provisioners": [{
     "type": "chef-solo",
