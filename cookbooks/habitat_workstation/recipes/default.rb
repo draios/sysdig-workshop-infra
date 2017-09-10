@@ -34,7 +34,12 @@ user 'chef' do
   manage_home true
   home '/home/chef'
   shell '/bin/bash'
-  password '$1$seaspong$/UREL79gaEZJRXoYPaKnE.'
+  # chef
+  # password '$1$seaspong$/UREL79gaEZJRXoYPaKnE.'
+  # devopsdays
+  # password '$1$c0ZYNwlj$Mc4gPTMFVu/4QfZQlQ3k71'
+  # habitat
+  password '$1$O8xTKqhe$c1LNYkTGAX8ZnC6ISl0VQ.'
   action :create
 end
 
