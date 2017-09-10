@@ -51,6 +51,11 @@ end
 if node['platform_family'] == 'rhel'
   service 'sshd'
 
+  execute 'allow port 443 for ssh' do
+    command 'semanage port -m -t ssh_port_t  -p tcp 443'
+    notifies :restart, 'service[sshd]'
+  end
+
   template '/etc/ssh/sshd_config' do
     source 'rhel-sshd_config.erb'
     owner 'root'
