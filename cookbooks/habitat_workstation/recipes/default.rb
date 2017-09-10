@@ -7,6 +7,7 @@
 if (node["platform_family"] == "debian")
   include_recipe 'ufw::disable'
 end
+include_recipe 'yum-epel::default'
 
 apt_update 'periodic apt update' do
   action :periodic
@@ -23,7 +24,7 @@ group 'hab' do
   gid 500
 end
 
-package %w( git tree vim emacs nano )
+package %w( git tree vim emacs nano jq )
 
 docker_service 'default' do
   action [:create, :start]
