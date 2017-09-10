@@ -3,10 +3,6 @@
 # Recipe:: default
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
-
-if (node["platform_family"] == "debian")
-  include_recipe 'ufw::disable'
-end
 include_recipe 'yum-epel::default'
 
 apt_update 'periodic apt update' do
@@ -77,6 +73,7 @@ if node['platform_family'] == 'rhel'
 end
 
 if node['platform_family'] == 'debian'
+  include_recipe 'ufw::disable'
   service 'ssh'
 
   template '/etc/ssh/sshd_config' do
