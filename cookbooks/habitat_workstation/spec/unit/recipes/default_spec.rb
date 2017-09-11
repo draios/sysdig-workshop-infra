@@ -42,6 +42,5 @@ describe 'habitat_workstation::default' do
     it 'starts the default docker service' do
       expect(chef_run).to start_docker_service('default')
     end
-
   end
 end
