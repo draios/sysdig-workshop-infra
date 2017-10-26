@@ -67,6 +67,7 @@ end
 
 def build_ami(template, ver)
   ver = ver.nil? ? 'latest' : ver
+  create_log_dir
   cmd = %W(packer build packer/#{template}.json | tee #{log(template, ver)})
   cmd.insert(2, "-var hab_version=#{ver}")
   cmd.join(' ')
@@ -137,6 +138,12 @@ def list_ips(name)
   cmd.insert(4, "| jq -r '.Stacks[].Outputs[] | \"\\(.OutputKey): \\(.OutputValue)\"' | sort")
   cmd.join(' ')
   shell_out_command(cmd)
+end
+
+def create_log_dir
+  cmd = Mixlib::ShellOut.new('mkdir -p logs', :timeout => 5, live_stream: STDOUT)
+  cmd.run_command
+  cmd
 end
 
 def log(template, ver)
