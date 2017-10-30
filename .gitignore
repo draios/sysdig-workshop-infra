@@ -4,3 +4,4 @@ stacks/*.yml
 results.yml
 config.yml
 Gemfile.lock
+logs
