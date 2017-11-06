@@ -115,14 +115,18 @@ end
 def gather_results
   pattern = '..-.*-.: ami-.*'
   h = { }
+  logs = Dir.entries('logs')
   if logs != '*'
     logs.each do |log|
-      match = File.read("logs/#{log}.log").split("\n").grep(/#{pattern}/).first.delete(':').split
-      region = match[0]
-      ami = match[1]
-      h[log] = {
-        region => ami
-      }
+      if File.exists?("logs/#{log}") && !File.directory?("logs/#{log}")
+        match = File.read("logs/#{log}").split("\n").grep(/#{pattern}/).first.delete(':').split
+        # match = File.read("logs/#{log}").split("\n").grep(/#{pattern}/)
+        region = match[0]
+        ami = match[1]
+        h[log] = {
+          region => ami
+        }
+      end
     end
     puts 'Parsing logs and writing ./results.yml'
     File.open("results.yml", 'w') { |file| file.puts h.to_yaml }
