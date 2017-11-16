@@ -67,6 +67,7 @@ end
 
 def build_ami(template, ver)
   ver = ver.nil? ? 'latest' : ver
+  create_log_dir
   cmd = %W(packer build packer/#{template}.json | tee #{log(template, ver)})
   cmd.insert(2, "-var hab_version=#{ver}")
   cmd.join(' ')
@@ -114,14 +115,18 @@ end
 def gather_results
   pattern = '..-.*-.: ami-.*'
   h = { }
+  logs = Dir.entries('logs')
   if logs != '*'
     logs.each do |log|
-      match = File.read("logs/#{log}.log").split("\n").grep(/#{pattern}/).first.delete(':').split
-      region = match[0]
-      ami = match[1]
-      h[log] = {
-        region => ami
-      }
+      if File.exists?("logs/#{log}") && !File.directory?("logs/#{log}")
+        match = File.read("logs/#{log}").split("\n").grep(/#{pattern}/).first.delete(':').split
+        # match = File.read("logs/#{log}").split("\n").grep(/#{pattern}/)
+        region = match[0]
+        ami = match[1]
+        h[log] = {
+          region => ami
+        }
+      end
     end
     puts 'Parsing logs and writing ./results.yml'
     File.open("results.yml", 'w') { |file| file.puts h.to_yaml }
@@ -137,6 +142,12 @@ def list_ips(name)
   cmd.insert(4, "| jq -r '.Stacks[].Outputs[] | \"\\(.OutputKey): \\(.OutputValue)\"' | sort")
   cmd.join(' ')
   shell_out_command(cmd)
+end
+
+def create_log_dir
+  cmd = Mixlib::ShellOut.new('mkdir -p logs', :timeout => 5, live_stream: STDOUT)
+  cmd.run_command
+  cmd
 end
 
 def log(template, ver)
