@@ -20,7 +20,7 @@ group 'hab' do
   gid 500
 end
 
-package %w( git tree vim emacs nano jq )
+package %w( git tree vim emacs nano jq curl tmux )
 
 docker_service 'default' do
   action [:create, :start]
@@ -38,6 +38,12 @@ user 'chef' do
   # habitat
   password '$1$O8xTKqhe$c1LNYkTGAX8ZnC6ISl0VQ.'
   action :create
+end
+
+group 'docker' do
+  action :modify
+  members 'chef'
+  append true
 end
 
 sudo 'chef' do
@@ -95,3 +101,5 @@ cookbook_file '/home/chef/new-mongodb-config.toml' do
   group 'chef'
   mode '0664'
 end
+
+include_recipe 'habitat_workstation::docker_compose'
