@@ -13,19 +13,26 @@ describe group('hab') do
   it { should exist }
 end
 
-%w( git tree emacs nano ).each do |p|
+%w( git tree emacs nano jq curl tmux ).each do |p|
   describe package(p) do
     it { should be_installed }
   end
 end
 
 # the vim package may be vim-enhanced or vim
-describe command('vim') do
-  it { should exist }
+describe.one do
+  describe package('vim') do
+    it { should be_installed }
+  end
+
+  describe package('vim-enhanced') do
+    it { should be_installed }
+  end
 end
 
 describe user('chef') do
   it { should exist }
+  its('groups') { should include 'docker' }
 end
 
 describe port('22') do

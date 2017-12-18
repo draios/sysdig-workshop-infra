@@ -5,3 +5,4 @@ results.yml
 config.yml
 Gemfile.lock
 logs
+inspec.lock
