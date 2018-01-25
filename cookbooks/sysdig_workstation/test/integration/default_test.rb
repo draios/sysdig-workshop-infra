@@ -1,17 +1,9 @@
 # # encoding: utf-8
 
-# Inspec test for recipe habitat_workstation::default
+# Inspec test for recipe sysdig_workstation::default
 
 # The Inspec reference, with examples and extensive documentation, can be
 # found at https://docs.chef.io/inspec_reference.html
-
-describe user('hab') do
-  it { should exist }
-end
-
-describe group('hab') do
-  it { should exist }
-end
 
 %w( git tree emacs nano jq curl tmux ).each do |p|
   describe package(p) do
@@ -30,7 +22,7 @@ describe.one do
   end
 end
 
-describe user('chef') do
+describe user('sysdig') do
   it { should exist }
   its('groups') { should include 'docker' }
 end

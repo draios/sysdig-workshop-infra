@@ -2,7 +2,6 @@
   "variables": {
     "aws_access_key": "{{env `AWS_ACCESS_KEY`}}",
     "aws_secret_key": "{{env `AWS_SECRET_KEY`}}",
-    "hab_version": "latest",
     "timestamp": "{{isotime \"20060102150405\"}}"
   },
   "builders": [{
@@ -13,7 +12,7 @@
     "source_ami_filter": {
       "filters": {
         "virtualization-type": "hvm",
-        "name": "*ubuntu-zesty-17.04-amd64-server-*",
+        "name": "*ubuntu-artful-17.10-amd64-server-*",
         "root-device-type": "ebs"
       },
       "owners": ["099720109477"],
@@ -22,18 +21,13 @@
     "instance_type": "t2.medium",
     "ssh_username": "ubuntu",
     "ssh_pty": true,
-    "ami_name": "Ubuntu 17.04 - hab {{user `hab_version`}} - {{user `timestamp`}}"
+    "ami_name": "Ubuntu 17.10 - Sysdig Workstation - {{user `timestamp`}}"
   }],
   "provisioners": [{
     "type": "chef-solo",
     "cookbook_paths": ["vendored-cookbooks"],
     "run_list": [
-      "recipe[habitat_workstation]"
-    ],
-    "json": {
-      "hab": {
-        "version": "{{user `hab_version`}}"
-      }
-    }
+      "recipe[sysdig_workstation]"
+    ]
   }]
 }

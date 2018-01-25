@@ -32,8 +32,8 @@ end
 namespace :cookbook do
   desc 'Vendor Cookbooks'
   task :vendor do
-    shell_out_command('rm -rf cookbooks/habitat_workstation/Berksfile.lock vendored-cookbooks/*')
-    shell_out_command('berks vendor -b cookbooks/habitat_workstation/Berksfile vendored-cookbooks/')
+    shell_out_command('rm -rf cookbooks/sysdig_workstation/Berksfile.lock vendored-cookbooks/*')
+    shell_out_command('berks vendor -b cookbooks/sysdig_workstation/Berksfile vendored-cookbooks/')
   end
 end
 
@@ -188,6 +188,7 @@ def update_template(name, num_hosts, ttl)
   @ami_id = fetch_ami_id
   @keypair = fetch_aws_keypair_name
   @workstations = num_hosts.to_i
+  @name = name
   rendered_cfn = ERB.new(File.read('templates/cfn.yml.erb'), nil, '-').result(binding)
   File.open("stacks/#{name}.cfn.yml", 'w') { |file| file.puts rendered_cfn }
   puts "Updated stacks/#{name}.cfn.yml"

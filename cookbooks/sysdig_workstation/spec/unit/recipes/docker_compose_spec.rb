@@ -1,12 +1,12 @@
 #
-# Cookbook:: habitat_workstation
+# Cookbook:: sysdig_workstation
 # Spec:: default
 #
 # Copyright:: 2017, The Authors, All Rights Reserved.
 
 require 'spec_helper'
 
-describe 'habitat_workstation::docker_compose' do
+describe 'sysdig_workstation::docker_compose' do
   before do
     # avoid breaking all of core chef wherever it calls File.exist? with other arguments
     allow(File).to receive(:exist?).and_call_original

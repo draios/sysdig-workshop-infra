@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: habitat_workstation
+# Cookbook Name:: sysdig_workstation
 # Recipe:: default
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
@@ -9,49 +9,35 @@ apt_update 'periodic apt update' do
   action :periodic
 end
 
-user 'hab' do
-  manage_home false
-  system true
-  uid 500
-end
-
-group 'hab' do
-  members ['hab']
-  gid 500
-end
-
 package %w( git tree vim emacs nano jq curl tmux )
 
 docker_service 'default' do
   action [:create, :start]
 end
 
-user 'chef' do
-  comment 'ChefDK User'
+user 'sysdig' do
+  comment 'Sysdig User'
   manage_home true
-  home '/home/chef'
+  home '/home/sysdig'
   shell '/bin/bash'
-  # chef
-  # password '$1$seaspong$/UREL79gaEZJRXoYPaKnE.'
-  # devopsdays
-  # password '$1$c0ZYNwlj$Mc4gPTMFVu/4QfZQlQ3k71'
-  # habitat
-  password '$1$O8xTKqhe$c1LNYkTGAX8ZnC6ISl0VQ.'
+  password '$1$2JC3pVTk$zWF7NwiS/Ts0RHJLaMiNg0'
   action :create
 end
 
 group 'docker' do
   action :modify
-  members 'chef'
+  members 'sysdig'
   append true
 end
 
-sudo 'chef' do
-  template 'chef-sudoer.erb'
+sudo 'sysdig' do
+  template 'sysdig-sudoer.erb'
 end
 
 if node['platform_family'] == 'rhel'
   service 'sshd'
+
+  package 'httpd-tools'
 
   execute 'allow port 443 for ssh' do
     command 'semanage port -m -t ssh_port_t  -p tcp 443'
@@ -89,17 +75,9 @@ if node['platform_family'] == 'debian'
     mode '0644'
     notifies :restart, 'service[ssh]'
   end
+
+  package 'apache2-utils'
+
 end
 
-hab_install 'install habitat' do
-  not_if { node['hab']['version'] == 'none' }
-end
-
-cookbook_file '/home/chef/new-mongodb-config.toml' do
-  source 'new-mongodb-config.toml'
-  owner 'chef'
-  group 'chef'
-  mode '0664'
-end
-
-include_recipe 'habitat_workstation::docker_compose'
+include_recipe 'sysdig_workstation::docker_compose'

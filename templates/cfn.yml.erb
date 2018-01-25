@@ -1,5 +1,5 @@
 ---
-Description: "Habitat Lab - <%= @workstations.to_s %> workstations"
+Description: "Sysdig Workshop - <%= @workstations.to_s %> workstations"
 
 Parameters:
   InstanceType:
@@ -53,7 +53,7 @@ Resources:
             DeleteOnTermination: "true"
       Tags:
       - Key: Name
-        Value: "workstation <%= i.to_s %>"
+        Value: "<%= @name %> workstation <%= i.to_s %>"
       - Key: X-Dept
         Value: !Ref Department
       - Key: X-Contact
