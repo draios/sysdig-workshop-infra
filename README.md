@@ -54,12 +54,22 @@ ubuntu-1714
 
 ## Share the AMIs with other Amazon accounts
 
-The `subscribers.yml` is a YAML file with account IDs to share an image with. 
+`subscribers.yml` is a YAML file with account IDs to share an image with. 
 
 ```bash
 $ export AMI_ID=the_ami_id_generated_by_packer
 $ rake ami:share
 ```
+
+## Copy the AMIs other Amazon regions
+
+`regions.yml` is a YAML file with regions to copy an image to. The source region is the region set in the `config.yml` file, and the source image is the value of `$AMI_ID`.
+
+```bash
+$ export AMI_ID=the_ami_id_generated_by_packer
+$ rake ami:copy
+```
+
 
 ## Deploy the CloudFormation stack
 

@@ -27,6 +27,18 @@ namespace :ami do
       `aws ec2 modify-image-attribute --image-id #{ami_id} --launch-permission "{\\"Add\\":[{\\"UserId\\":\\"#{user_id}\\"}]}"`
     end
   end
+
+  task :copy do
+    ami_id = fetch_ami_id
+    ami_name = fetch_ami_name(ami_id)
+    aws_regions = YAML.load(File.read('./regions.yml'))["aws"]
+    @conf=conf
+
+    aws_regions.each do |target_region|
+      puts "Copying #{ami_id} from #{conf['region']} to #{target_region}"
+      shell_out_command("aws ec2 copy-image --source-region #{conf['region']} --source-image-id #{ami_id} --region #{target_region} --name \"#{ami_name}\"")
+    end
+  end
 end
 
 namespace :cookbook do
@@ -106,6 +118,12 @@ end
 
 def fetch_ami_id
   fetch_env('AMI_ID')
+end
+
+def fetch_ami_name(ami_id)
+#  fetch_env('AMI_NAME')
+  name = `aws ec2 describe-images --image-ids #{ami_id} --output text --query 'Images[*].Name'`
+  name.chomp
 end
 
 def fetch_aws_keypair_name
