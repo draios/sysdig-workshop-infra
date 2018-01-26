@@ -2,12 +2,10 @@
 
 Cookbooks and Packer config to create a workstation for use during Sysdig workshops. Thanks to the Chef team for letting us copy [their code](https://github.com/chef-cft/habitat_workstation).
 
-## Current Amazon Machine Image IDs
 
-AMIs are currently only available in `us-east` region. Make sure you have a keypair setup in that region.
-*NOTE*: Ensure your `~/.aws/config` region is set to `us-east-1` pending region abstraction.
+## Pre-requisites
 
-An `~/.aws/config` file might look like:
+You'll need a valid `~/.aws/config` file that might look like:
 
 ```
 [default]
@@ -16,18 +14,18 @@ aws_access_key_id = MYKEYID
 aws_secret_access_key = MYACCESSKEY
 ```
 
-Platform     | AMI         
-----         | ------      
-CentOS 7     | ami-d9281aa3
-Ubuntu 16.04 | ami-822d1ff8
-Ubuntu 17.10 | ami-f3e2d089
-
-## Pre-requisites
+You'll also need to export the name of you AWS KeyPair as `AWS_KEYPAIR_NAME`.
 
 ```
 # The name of the AWS KeyPair (your SSH key) to use for deployment
 export AWS_KEYPAIR_NAME='your_aws_keypair_name'
 ```
+
+## Current Amazon Machine Image IDs
+
+You can find the current AMI IDs by running:
+
+`$ rake list:amis`
 
 ## Build the Amazon Machine Images (AMIs)
 
@@ -37,7 +35,7 @@ This rake task updates the vendored cookbooks before building the AMIs.
 
 ### To create a single AMI 
 
-`$ rake "ami:build[centos-7,none]"`
+`$ rake "ami:build[centos-7]"`
 
 ### To build all AMIs
 

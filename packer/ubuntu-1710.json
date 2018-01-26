@@ -21,7 +21,7 @@
     "instance_type": "t2.medium",
     "ssh_username": "ubuntu",
     "ssh_pty": true,
-    "ami_name": "Ubuntu 17.10 - Sysdig Workstation - {{user `timestamp`}}"
+    "ami_name": "Ubuntu 17.10 - Sysdig Workshop - {{user `timestamp`}}"
   }],
   "provisioners": [{
     "type": "chef-solo",

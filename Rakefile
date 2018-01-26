@@ -62,9 +62,9 @@ namespace :list do
     list_ips(args[:stack])
   end
 
-  desc 'List AMIs from logs'
+  desc 'List AMIs from all regions'
   task :amis do
-    gather_results
+    list_amis
   end
 
   desc 'List available templates'
@@ -128,6 +128,19 @@ end
 
 def fetch_aws_keypair_name
   fetch_env('AWS_KEYPAIR_NAME')
+end
+
+def list_amis
+  aws_regions = YAML.load(File.read('./regions.yml'))["aws"]
+  @conf=conf
+
+  puts "#{conf['region']}\n-----"
+  shell_out_command("aws ec2 describe-images --region #{conf['region']} --filters \"Name=name,Values=*Sysdig Workshop*\" --owner self --output text --query 'Images[*].[ImageId,Name]'")
+  aws_regions.each do |target_region|
+    puts "#{target_region}\n-----"
+    shell_out_command("aws ec2 describe-images --region #{target_region} --filters \"Name=name,Values=*Sysdig Workshop*\" --owner self --output text --query 'Images[*].[ImageId,Name]'")
+  end  
+
 end
 
 def gather_results
