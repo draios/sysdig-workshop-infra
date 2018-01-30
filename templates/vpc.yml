@@ -1,6 +1,6 @@
 ---
 Description: >-
-  An AWS VPC with three subnets.
+  An AWS VPC with one subnet for training workstations.
 AWSTemplateFormatVersion: 2010-09-09
 Parameters:
   ResourceName:
