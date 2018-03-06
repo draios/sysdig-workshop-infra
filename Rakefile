@@ -80,7 +80,7 @@ end
 def build_ami(template, ver)
   ver = ver.nil? ? 'latest' : ver
   create_log_dir
-  cmd = %W(packer build packer/#{template}.json | tee #{log(template, ver)})
+  cmd = %W(packer build --only amazon-ebs packer/#{template}.json | tee #{log(template, ver)})
   cmd.insert(2, "-var hab_version=#{ver}")
   cmd.join(' ')
   shell_out_command(cmd)

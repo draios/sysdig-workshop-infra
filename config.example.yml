@@ -1,8 +1,8 @@
 ---
-contact: Your Name Here 
+contact: Michael Ducy 
 dept: Marketing
 project: Sysdig Workshops
-region: us-east-1
-sg: sg-57fa1720
-subnet: subnet-dae6d691
-type: t2.medium
+region: eu-central-1
+sg: sg-someid
+subnet: subnet-someid
+type: t2.medium 
