@@ -1,0 +1,30 @@
+---
+driver:
+  name: ec2
+  instance_type: t2.medium
+  security_group_ids: ["sg-57fa1720"]
+  subnet_id: subnet-dae6d691
+  aws_ssh_key_id: <%= ENV["EC2_SSH_KEY_NAME"] %>
+
+transport:
+  ssh_key: <%= ENV["EC2_SSH_KEY_PATH"] %>
+
+provisioner:
+  name: chef_zero
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: ubuntu-16.04
+  - name: ubuntu-17.10
+  - name: centos-7
+
+suites:
+  - name: default
+    run_list:
+      - recipe[sysdig_workstation::default]
+    verifier:
+      inspec_tests:
+        - test/recipes/default_test.rb
+        - test/integration/docker_compose_test.rb

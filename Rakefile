@@ -47,6 +47,12 @@ namespace :cookbook do
     shell_out_command('rm -rf cookbooks/sysdig_workstation/Berksfile.lock vendored-cookbooks/*')
     shell_out_command('berks vendor -b cookbooks/sysdig_workstation/Berksfile vendored-cookbooks/')
   end
+  desc 'Vendor Falco Cookbooks'
+  task :vendor_falco do
+    shell_out_command('rm -rf cookbooks/falco_workstation/Berksfile.lock vendored-cookbooks/*')
+    shell_out_command('berks vendor -b cookbooks/falco_workstation/Berksfile vendored-cookbooks/')
+  end
+
 end
 
 

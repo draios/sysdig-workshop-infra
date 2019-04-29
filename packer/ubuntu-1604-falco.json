@@ -1,0 +1,94 @@
+{
+  "variables": {
+    "aws_access_key": "{{env `AWS_ACCESS_KEY`}}",
+    "aws_secret_key": "{{env `AWS_SECRET_KEY`}}",
+    "timestamp": "{{isotime \"20060102150405\"}}",
+    "azure_client_id": "{{env `AZURE_CLIENT_ID`}}",
+    "azure_client_secret": "{{env `AZURE_CLIENT_SECRET`}}",
+    "azure_object_id": "{{env `AZURE_OBJECT_ID`}}",
+    "azure_subscription_id": "env `AZURE_SUBSCRIPTION_ID`",
+    "azure_tenant_id": "env `AZURE_TENANT_ID`",
+    "azure_resource_group_name": "{{env `AZURE_RG_NAME`}}",
+    "azure_location": "{{env `AZURE_LOCATION`}}"  
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "region": "us-east-1",
+    "source_ami_filter": {
+      "filters": {
+        "virtualization-type": "hvm",
+        "name": "*ubuntu-xenial-16.04-amd64-server-*",
+        "root-device-type": "ebs"
+      },
+      "owners": ["099720109477"],
+      "most_recent": true
+    },
+    "instance_type": "t2.medium",
+    "ssh_username": "ubuntu",
+    "ssh_pty": true,
+    "ami_name": "Ubuntu 16.04 - Falco Workshop - {{user `timestamp`}}"
+  },{
+    "type": "azure-arm",
+
+    "client_id": "{{user `azure_client_id`}}",
+    "client_secret": "{{user `azure_client_secret`}}",
+    "object_id": "{{user `azure_object_id`}}",
+    "subscription_id": "{{user `azure_subscription_id`}}",
+    "tenant_id": "{{user `azure_tenant_id`}}",
+
+    "managed_image_resource_group_name": "{{user `azure_resource_group_name`}}",
+    "managed_image_name": "Ubuntu1604SysdigWorkshop{{user `timestamp`}}",
+
+    "os_type": "Linux",
+    "image_publisher": "Canonical",
+    "image_offer": "UbuntuServer",
+    "image_sku": "16.04-LTS",
+
+    "azure_tags": {
+        "dept": "marketing",
+        "task": "image deployment"
+    },
+
+    "location": "{{user `azure_location`}}",
+    "vm_size": "Standard_D2_v3"
+  }
+
+],
+  "provisioners": [
+  {
+    "type": "chef-solo",
+    "version": "13",
+    "cookbook_paths": ["vendored-cookbooks"],
+    "run_list": [
+      "recipe[falco_workstation]"
+    ]
+  },
+  {
+    "type": "file",
+    "source": "setup-falco.sh",
+    "destination": "/tmp/setup-falco.sh"
+  },
+  {
+    "type": "shell",
+    "inline":[
+      "sudo mv /tmp/setup-falco.sh /usr/local/bin/setup-falco.sh"
+    ]
+  },
+  {
+    "type": "shell",
+    "inline":[
+      "sudo passwd -e falco"
+    ]
+  },
+  {
+    "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
+    "inline": [
+      "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"
+    ],
+    "inline_shebang": "/bin/sh -x",
+    "type": "shell",
+    "only": ["azure-arm"]
+  } ]
+}

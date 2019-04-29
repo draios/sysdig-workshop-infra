@@ -9,30 +9,29 @@ apt_update 'periodic apt update' do
   action :periodic
 end
 
-package %w( git tree vim emacs nano jq curl tmux )
+package %w( git tree vim emacs nano jq curl tmux python-pip zip unzip socat )
 
 docker_service 'default' do
   action [:create, :start]
-  version '17.12.1'
 end
 
-user 'sysdig' do
-  comment 'Sysdig User'
+user 'falco' do
+  comment 'Falco User'
   manage_home true
-  home '/home/sysdig'
+  home '/home/falco'
   shell '/bin/bash'
-  password '$1$2JC3pVTk$zWF7NwiS/Ts0RHJLaMiNg0'
+  password '$1$ZcQEKWFP$ChM/Nb3B5rmwrq72nvfbI.'
   action :create
 end
 
 group 'docker' do
   action :modify
-  members 'sysdig'
+  members 'falco'
   append true
 end
 
-sudo 'sysdig' do
-  template 'sysdig-sudoer.erb'
+sudo 'falco' do
+  template 'falco-sudoer.erb'
 end
 
 if node['platform_family'] == 'rhel'
@@ -81,4 +80,4 @@ if node['platform_family'] == 'debian'
 
 end
 
-include_recipe 'sysdig_workstation::docker_compose'
+include_recipe 'falco_workstation::docker_compose'
